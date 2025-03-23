@@ -1,0 +1,14 @@
+# ninja log v6
+38	1372	7640315592876876	CMakeFiles/FixedCapBiMap.dir/first_assignment/src/ExtendedTest.cpp.obj	748a97d343d5d9e
+62	687	7640315593115000	CMakeFiles/FixedCapBiMap.dir/first_assignment/src/FixedCapBiMapIterator.cpp.obj	6b111f64fcfd36ef
+49	703	7640315592979935	CMakeFiles/FixedCapBiMap.dir/first_assignment/src/FixedCapBiMap.cpp.obj	168be1f781c1d71c
+77	902	7640315593257898	CMakeFiles/FixedCapBiMap.dir/first_assignment/src/ShortTest.cpp.obj	b470186c9cef6312
+8	1257	7640315592575043	CMakeFiles/FixedCapBiMap.dir/first_assignment/src/App.cpp.obj	b4aa3e5d709d844f
+1373	1655	7640315606222165	FixedCapBiMap.exe	9b479a260b4ba617
+12	1212	7640327701221557	build.ninja	afa69a37ff42be42
+68	808	7640327702381954	CMakeFiles/FixedCapBiMap.dir/first_assignment/src/FixedCapBiMapIterator.cpp.obj	6b111f64fcfd36ef
+79	810	7640327702497383	CMakeFiles/FixedCapBiMap.dir/first_assignment/src/ShortTest.cpp.obj	b470186c9cef6312
+58	811	7640327702291659	CMakeFiles/FixedCapBiMap.dir/first_assignment/src/FixedCapBiMap.cpp.obj	168be1f781c1d71c
+13	1305	7640327701834014	CMakeFiles/FixedCapBiMap.dir/first_assignment/src/App.cpp.obj	b4aa3e5d709d844f
+34	1377	7640327702044039	CMakeFiles/FixedCapBiMap.dir/first_assignment/src/ExtendedTest.cpp.obj	748a97d343d5d9e
+1377	1877	7640327715476867	FixedCapBiMap.exe	9b479a260b4ba617
