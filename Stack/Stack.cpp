@@ -10,7 +10,7 @@ Stack::Stack() {
 	numberOfElements = 0;
 
 	elems = new TElem[capacity];
-}
+} // BC = WC = TC = theta(1)
 
 
 void Stack::push(TElem e) {
@@ -28,7 +28,7 @@ void Stack::push(TElem e) {
 	}
 
 	elems[numberOfElements++] = e;
-}
+} // BC = theta(1), WC = theta(numberOfElements), TC = theta(numberOfElements)
 
 TElem Stack::top() const {
 	if (numberOfElements == 0) {
@@ -36,7 +36,7 @@ TElem Stack::top() const {
 	}
 
 	return elems[numberOfElements - 1];
-}
+} // BC = WC = TC = theta(1)
 
 TElem Stack::pop() {
 	if (numberOfElements == 0) {
@@ -46,15 +46,14 @@ TElem Stack::pop() {
 	TElem temp = elems[numberOfElements - 1];
 	numberOfElements --;
 	return temp;
-}
+} // BC = WC = TC = theta(1)
 
 
 bool Stack::isEmpty() const {
-	
 	return (numberOfElements == 0);
-}
+} // BC = WC = TC = theta(1)
 
 Stack::~Stack() {
 	delete[] elems;
 	elems = nullptr;
-}
+} // BC = WC = TC = theta(1)

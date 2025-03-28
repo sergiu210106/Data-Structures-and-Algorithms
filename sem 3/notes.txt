@@ -1,0 +1,100 @@
+1. sorting algoithms    
+    a. Bucket sort
+    b. lexicographic sort
+    c. radix sort
+2. 
+    a. infix to postfix notation - conversion
+    b. postfix expression evaluation
+
+
+A. sequence s -> n pairs of type (key,value) 
+    s : (7, d), (1, c), (3, b), (7,g), (3, a), (7, e)
+    sort s on keys
+    0    1     2   3            4   5   6   7  
+B       (1,c)      3,b , 3,c                7,d , 7,g , 7,e
+
+keys in {0,.., N - 1}
+
+first step -> distribution into buckets
+
+
+second step -> go through B, take elems from each bucket, and place them in s ( s was emptied in the first step)
+
+(1,c), (3,b), (3,a), (7,d), (7,g), (7, e) -> in order of how they where put
+
+PSEUDOCODE:
+s sequence
+b[i] sequence 
+
+operations :
+    empty(s) -> returns true if s is empty, false otherwise -> bool
+    remove(s, p) : element, where element = (key, value), p = TPosition
+    insertLast(s, element)
+    first(s) : position of the first element in s
+
+
+algoithm bucket-sort is
+    // assume B initialized
+        while not empty(s) execute
+            p <- first(s)
+            (k,v)<-remove(s,p)
+            insertLast(B[k], (k,v))
+        end_while
+
+        for i<-0, n-1 execute   
+            while not empty(B[i]) execute
+                p <- first(B[i])
+                (k,v) <- remove(B[i], p)
+                insertLast(s, (k,v))
+
+
+complexity : Theta (n + N)
+
+-> linear when N in O(n)
+STABLE - > for equal key, 
+
+B. lexicographic sort
+    sort the following seq lexicographically
+        (7,4,6),(5,1,5),(2,4,6),(2,1,4),(3,2,4)
+        -> input = sequence of d-tuples
+
+ 
+last part
+    infix and postfix conversions
+
+    Ex. 5 * (2+9) - 3 + 8 / 2 * (3 + 2 * 5) -> infix
+        529+*3-82/325*+*+
+
+
++------------------------------------------------------
+|           |       Stack       |       Queue       |
++------------------------------------------------------
+|     5     |                   |        5          |
++------------------------------------------------------
+|     *     |        2          |        5          | 
++------------------------------------------------------
+|     (     |        *(         |        5          |
++------------------------------------------------------
+|     2     |        *(         |        52         |
++------------------------------------------------------
+|     +     |        *(+        |        52         |
++------------------------------------------------------
+|     9     |        *(+        |        529        |
++------------------------------------------------------
+|     )     |        *          |        529+       |
++------------------------------------------------------
+|     -     |        -          |        529+*      |
++------------------------------------------------------
+|     3     |        -          |        529+*3     |
++------------------------------------------------------
+|     +     |        +          |       529+*3-     |
++------------------------------------------------------
+|           |                   |                   |
++------------------------------------------------------
+
+
+
+case 1: operand -> push to Queue
+case 2: '(' -> push to Stack
+
+case 3: ')' -> pop from stack until first operator with higher priority -> push elements to queue

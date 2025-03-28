@@ -10,7 +10,7 @@ Queue::Queue() {
 	numberOfElements = 0;
 
 	elements = new int[capacity];
-}
+} // BC = WC = TC = theta(1)
 
 
 void Queue::push(TElem elem) {
@@ -28,7 +28,7 @@ void Queue::push(TElem elem) {
 	}
 
 	elements[numberOfElements++] = elem; 
-}
+} // BC = theta(1), WC = theta(numberOfElements), TC = theta(numberOfElements)
 
 
 TElem Queue::top() const {
@@ -37,7 +37,7 @@ TElem Queue::top() const {
 	}
 
 	return elements[0];
-}
+} // BC = WC = TC = theta(1)
 
 TElem Queue::pop() {
 	if (numberOfElements == 0) {
@@ -51,15 +51,15 @@ TElem Queue::pop() {
 
 	numberOfElements --;
 	return temp;
-}
+}// BC = WC = TC = theta(numberOfElements)
 
 bool Queue::isEmpty() const {
 	return (numberOfElements == 0);
-}
+} // BC = WC = TC = theta(1)
 
 
 Queue::~Queue() {
 	delete[] elements;
 	elements = nullptr;
-}
+} // BC = WC = TC = theta(1)
 
