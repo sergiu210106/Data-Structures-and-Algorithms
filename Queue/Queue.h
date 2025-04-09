@@ -12,8 +12,13 @@ private:
 	TElem* elements;
 	int numberOfElements;
 	int capacity;
+
+	int front;
+	int rear;
 public:
 	Queue();
+	//resize function
+	void resize();
 
 	//pushes an element to the end of the queue
 	void push(TElem e);
@@ -28,6 +33,13 @@ public:
 
 	//checks if the queue is empty
 	bool isEmpty() const;
+
+	//returns the minimum element from the Queue (assume that the elements are integer numbers)  
+	//throws an exception if the Queue is empty   
+	TElem minimum() ;  
+
+	// assignment operator
+	Queue& operator=(const Queue& other);
 
 	// destructor
 	~Queue();

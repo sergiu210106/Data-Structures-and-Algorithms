@@ -11,15 +11,15 @@ IteratedList::IteratedList() {
 
 int IteratedList::size() const {
 	return length;
-}
+} // BC = WC = TC = theta(1)
 
 bool IteratedList::isEmpty() const {
 	return length == 0;
-}
+} // BC = WC = TC = theta(1)
 
 ListIterator IteratedList::first() const {
 	return ListIterator(*this);
-}
+}// BC = WC = TC = theta(1)
 
 TElem IteratedList::getElement(ListIterator pos) const {
 	if (!pos.valid()) {
@@ -27,7 +27,7 @@ TElem IteratedList::getElement(ListIterator pos) const {
 	}
 
 	return pos.getCurrent();
-}
+}// BC = WC = TC = theta(1)
 
 TElem IteratedList::remove(ListIterator& pos) {
 	if(!pos.valid()) {
@@ -54,7 +54,7 @@ TElem IteratedList::remove(ListIterator& pos) {
 	length --;
 
 	return removedValue;
-}
+} // BC = WC = TC = theta(1)
 
 ListIterator IteratedList::search(TElem e) const{
 	ListIterator it = first();
@@ -70,7 +70,7 @@ ListIterator IteratedList::search(TElem e) const{
     ListIterator invalidIt(*this);
     invalidIt.current = nullptr;  
     return invalidIt;
-}
+} // BC = WC = TC = O(length)
 
 TElem IteratedList::setElement(ListIterator pos, TElem e) {
 	if (!pos.valid()) {
@@ -79,7 +79,7 @@ TElem IteratedList::setElement(ListIterator pos, TElem e) {
 	TElem oldValue = pos.getCurrent();
 	pos.current->data = e;
 	return oldValue;
-}
+}// BC = WC = TC = theta(1)
 
 void IteratedList::addToPosition(ListIterator& pos, TElem e) {
 	if (!pos.valid()) {
@@ -98,7 +98,7 @@ void IteratedList::addToPosition(ListIterator& pos, TElem e) {
 	pos.next(); 
 
 	length++;
-}
+}// BC = WC = TC = theta(1)
 
 
 void IteratedList::addToBeginning(TElem e) {
@@ -114,7 +114,7 @@ void IteratedList::addToBeginning(TElem e) {
 	}
 
 	length++;
-}
+} // BC = WC = TC = theta(1)
 
 void IteratedList::addToEnd(TElem e) {
 	Node* next = new Node{e, nullptr, tail};
@@ -129,7 +129,7 @@ void IteratedList::addToEnd(TElem e) {
 	}
 
 	length ++;
-}
+} // BC = WC = TC = theta(1)
 
 IteratedList::~IteratedList() {
 	Node* current = head;
@@ -139,4 +139,4 @@ IteratedList::~IteratedList() {
 		current = current->next;
 		delete toDelete;
 	}
-}
+} // BC = WC = TC = theta(1)

@@ -7,7 +7,7 @@
 #include "IteratedList.h"
 #include "ListIterator.h"
 
-
+#include <stdexcept>
 
 using namespace std;
 
@@ -44,12 +44,18 @@ void testAll() {
 	assert(it2.getCurrent() == 1);
 	it2.next();
 	assert(it2.getCurrent() == 77);
+	it2.previous();
+	assert(it2.getCurrent() == 1);
+	it2.next();
 	it2.next();
 	assert(it2.getCurrent() == 44);
 	it2.next();
 	assert(it2.getCurrent() == 3);
 	it2.next();
 	assert(it2.getCurrent() == 7);
+	it2.previous();
+	assert(it2.getCurrent() == 3);
+	it2.next();
 	it2.next();
 	assert(it2.valid() == false);
 
