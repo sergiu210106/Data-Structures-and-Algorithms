@@ -1,0 +1,145 @@
+SEMINAR 4 - SORTED MULTIMAP WITH SLL (SMM)
+
+MAP : 
+    container with (key, value) pairs
+    keys are unique (one key has one associated value)
+
+MULTIMAP :
+    container with (key, value) pairs
+    keys can have more than one value associated
+
+SORTED MULTIMAP:
+    container with (key, value) pairs
+    a key can have more than one value associated with it
+    keys sorted by a relation
+
+SMM CONTENTS:
+    -translations
+    -blood: sange, neam
+    -book: carte, a rezerva, publicatie
+    -red: rosu
+
+REPRESENTATION??
+    1.
+        Node : <key,value>, *next
+        <blood, sange> -> <blood,neam> -> <book, carte> -> <book, a rezerva> -> <book, publicatie> -> <red, rosu>
+    2. 
+        Node : <key, valueList>, * next
+        <blood, valueList> ->   <book, valueList>               -> <red, v>
+        \_ [sange, neam]        \_ [carte, a rezerva, publicatie]   \_[rosu]
+
+SMM REPRESENTATION:
+    TElem:
+        k:Tkey
+        vl:TList
+
+    Node:
+        TElem information
+	next (up_arrow)Node -> pointer
+	
+    SMM
+		head (up_arrow)Node
+		R: Relation
+	
+	Relation:
+		R:TKeyxTKey->{T,F}
+ 
+
+SMMITERATOR REPRESENTATION:
+	smm: SMM
+	current : (up_arrow) Node
+	(currentValueIndex: int)
+	itL : ListIterator
+	
+SMMITERATOR OPERATIONS:
+	init(it, smm)
+	first(it)
+	next(it)
+	valid(it)	
+	getCurrent(it) <TKey, TValue>
+
+	implementations:
+		subalgorithm init(it,smm) is:
+			it.smm = smm
+			it.current = smm.head
+			
+			if (it.current != NIL)
+				iterator([it.current].info.vl, it.itL)
+		
+		subalgorithm first(it) is:
+			it.current = it.smm.head
+			if (it.current != NIL)
+				iterator([it.current].info.vl, it.itL)		
+
+		subalgorithm valid(it) is:
+			if (it.current != NIL)
+				valid = true
+			else
+				valid = false
+
+		subalgorithm next(it) is:
+			if not valid(it)
+				@throw exception
+			
+			next(it.itL)
+			
+			if not valid(it.itL) 
+				current = [current].next
+				if (current != NIL)
+					iterator([it.current].info.vl, it.itL)
+					   	
+
+		subalgorithm getCurrent(it) is:
+			v = getCurrent(it.itL)
+			k = [it.current].info.k
+			getCurrent = <k,v>
+
+SMM
+	init(smm, R)
+	add(smm, k, v)
+	remove(smm, k, v)
+	search(smm, k, values)
+	destroy(smm)
+	
+
+	// n = number of keys
+	// m = number of pairs
+	implementations:
+		subalgorithm init(smm, R) is:
+			smm.R = R
+			smm.head = NIL
+		
+		subalgorithm destroy(smm) is: // total complexity theta(n) or theta(m) depending on the implementation of the list of values 
+			while (smm.head != NIL)
+				toDelete = smm.head
+				smm.head = [smm.head].next
+				destroy([toDelete].info.vl)
+				free(toDelete)
+		subalgorithm add(smm, k, v) is:
+			// search for key -> if it exists add to end of valueList else add new key
+			searchNode(smm, k, kNode, prev)
+			if (kNode != NIL)
+				addToEnd([kNode].info.vl)
+			else
+				addNewKey(smm, k, v, prev)			
+
+		subalgorithm searchNode(smm, k, kNode, previous) is:
+			current = smm.head
+			previous = NIL
+			found = false
+			
+			while (current != NIL and (not found) and R([current].info.k, k))
+				if ([current].info.k == k) 
+					found = true
+				else
+					previous = current
+					current = [current].next
+			if (found)
+				kNode = current
+			else
+				kNode = NIL
+		
+		
+		 
+	
+	 
