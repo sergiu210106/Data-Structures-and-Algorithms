@@ -68,5 +68,28 @@ void testAll() {
 	}
 	assert((vverif[0] == -3) && (vverif[1] == 5) && (vverif[2] == 7) && (vverif[3] == 10));
 
+	// TEST DIFFERENCE
+	SortedSet s_diff(r2);
+	s_diff.add(1);
+	s_diff.add(2);
+	s_diff.add(3);
+	s_diff.add(4);
+	s_diff.add(5);
+
+	SortedSet s2_diff(r2);
+	s2_diff.add(3);
+	s2_diff.add(4);
+	s2_diff.add(10);  // Not in s_diff
+
+	int removed = s_diff.difference(s2_diff);
+	assert(removed == 2); // 3 and 4 should be removed
+
+	assert(s_diff.search(1) == true);
+	assert(s_diff.search(2) == true);
+	assert(s_diff.search(3) == false); // removed
+	assert(s_diff.search(4) == false); // removed
+	assert(s_diff.search(5) == true);
+	assert(s_diff.search(10) == false); // was never in s_diff
+	assert(s_diff.size() == 3);
 }
 

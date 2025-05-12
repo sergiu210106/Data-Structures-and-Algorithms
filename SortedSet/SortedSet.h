@@ -22,7 +22,7 @@ private:
 
 	void resize();
 	int allocate(); // allocates a new node from the free list
-	void deallocate(int); //returns a node to the free list	
+	void deallocate(int pos); //returns a node to the free list	
 
 public:
 	//constructor
@@ -54,5 +54,7 @@ public:
 	// destructor
 	~SortedSet();
 
-
+	//keep only those elements that do not appear in s 
+	//returns the number of removed elements 
+	int difference(const SortedSet& s); 
 };

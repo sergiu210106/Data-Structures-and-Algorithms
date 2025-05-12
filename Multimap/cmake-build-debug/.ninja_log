@@ -1,0 +1,8 @@
+# ninja log v6
+18	1769	7675814313130142	CMakeFiles/assignment3.dir/main.cpp.obj	f64f9acfc0340ff5
+21	628	7675814630810728	build.ninja	84acda50745d55dc
+100	1443	7675814634264311	CMakeFiles/assignment3.dir/MultiMapIterator.cpp.obj	4681d83897258b58
+94	2545	7675814634195733	CMakeFiles/assignment3.dir/MultiMap.cpp.obj	d7da38a64ff5d43d
+108	2722	7675814634330615	CMakeFiles/assignment3.dir/ExtendedTest.cpp.obj	a8c3fd58add73c82
+1444	3082	7675814647700160	CMakeFiles/assignment3.dir/ShortTest.cpp.obj	db84af46e2c7c031
+3082	3303	7675814664074462	assignment3.exe	cc3845c75ec28df8

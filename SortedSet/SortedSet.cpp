@@ -12,7 +12,7 @@ SortedSet::SortedSet(Relation r) {
 	firstEmpty = 0;
 	head = -1;
 	relation = r;
-}
+} // BC = WC = TC = THETA(capacity)
 
 void SortedSet::resize() {
 	int newCapacity = capacity * 2;
@@ -36,7 +36,7 @@ void SortedSet::resize() {
 
 	firstEmpty = capacity;
 	capacity = newCapacity;
-}
+} // BC = WC = TC = THETA(capacity)
 
 int SortedSet::allocate() {
 	if (firstEmpty == -1)
@@ -44,12 +44,12 @@ int SortedSet::allocate() {
 	int newElem = firstEmpty;
 	firstEmpty = next[firstEmpty];
 	return newElem;
-}
+} // BC = THETA(1), WC = THETA(n), TC = THETA(1) AMORTIZED
 
 void SortedSet::deallocate(int pos) {
 	next[pos] = firstEmpty;
 	firstEmpty = pos;
-}
+} // BC = WC = TC = THETA(1)
 
 bool SortedSet::add(TComp elem) {
 	int current = head;
@@ -75,7 +75,7 @@ bool SortedSet::add(TComp elem) {
 		next[prev] = newPos;
 	}
 	return true;
-}
+} // BC = THETA(1), WC = THETA(n), TC = O(n)
 
 
 bool SortedSet::remove(TComp elem) {
@@ -84,7 +84,6 @@ bool SortedSet::remove(TComp elem) {
 
     while (current != -1 && relation(elements[current], elem)) {
         if (elements[current] == elem) {
-            // Found it — remove it
             if (prev == -1) {
                 head = next[current];
             } else {
@@ -98,34 +97,34 @@ bool SortedSet::remove(TComp elem) {
         current = next[current];
     }
 
-    // One last check (in case elem == elements[current] but relation returns false)
     if (current != -1 && elements[current] == elem) {
         if (prev == -1) {
             head = next[current];
         } else {
             next[prev] = next[current];
         }
+
         deallocate(current);
         return true;
     }
 
     return false;
-}
+} // BC = THETA(1), WC = THETA(n), TC = O(n)
 
 bool SortedSet::search(TComp elem) const {
-int current = head;
+	int current = head;
     while (current != -1 && relation(elements[current], elem)) {
         if (elements[current] == elem)
             return true;
+
         current = next[current];
     }
 
-    // One last check: maybe the current element is equal
     if (current != -1 && elements[current] == elem)
         return true;
 
     return false;
-}
+} // BC = THETA(1), WC = THETA(n), TC = O(n)
 
 
 int SortedSet::size() const {
@@ -135,22 +134,36 @@ int SortedSet::size() const {
 		current = next[current];
 	}
 	return count;
-}
+} // BC = WC = TC = THETA(n)
 
 
 
 bool SortedSet::isEmpty() const {
 	return head == -1;
-}
+} // BC = WC = TC = THETA(1)
 
 SortedSetIterator SortedSet::iterator() const {
 	return SortedSetIterator(*this);
-}
+} // BC = WC = TC = THETA(1)
 
 
 SortedSet::~SortedSet() {
 	delete[] elements;
 	delete[] next;
-}
+} // BC = WC = TC = THETA(1)
 
+int SortedSet::difference(const SortedSet& s) {
+	int removedCount = 0;
+	SortedSetIterator it = s.iterator();
 
+	while (it.valid()) {
+		TComp elem = it.getCurrent();
+		if (search(elem)) {
+			remove(elem);
+			removedCount++;
+		}
+		it.next();
+	}
+
+	return removedCount;
+} // BC = THETA(m), WC = THETA(m * n), TC = O(m * n), where m = s.size(), n = this->size()

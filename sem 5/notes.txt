@@ -1,0 +1,140 @@
+SEMINAR 3 cont
+
+ evaluate postfix expression
+ 529+*3-82/325*+*+
+ -> infix to postfix conversion ( sem 3 )
+
+ infix : 5 * (2 + 9) - 3 + (8 / 2) * (3 + 2 * 5)
+
+ queue : 529+*3-82/325*+*+ -> resulted from infix to postfix
+ -> to evaluate we use an auxiliary set 
+ Case 1. operand -> push to stack
+ Case 2. operator -> pop 2 elements from the stack, apply operation, push result to stack
+ Case 3. reach the end of parsing
+
+SEMINAR 5
+1. MERGE 2 SORTED SLL
+2. SUM OF MAX K ELEMS
+
+L1: 4->9->10->18
+L2: 1->6->7->8->9
+LR: 1->4->6->7->8->9->10->18
+
+Node 
+	info: Tcomp
+	next: *Node
+List
+	head:*Node
+
+subalgorithm merge(L1, L2, LR):
+	currentL1 <- L1.head
+	currentL2 <- L2.head
+	headLR <- NIL
+	tailLR <- NIL
+
+	while ( current1 != NIL and currentL2 != NIL) execute
+		allocate(newNode)
+		[newNode].next<-NIL
+	
+		if  [currentL1].info < [currentL2].info then
+			[newNode].info <- [currentL1].info
+			currentL1 <- currentL1.next
+		else 
+			[newNode].info <- [currentL2].info
+			currentL2 <- currentL2.next
+	
+		end_if
+
+		if headLR = NIL then
+			headLR <- newNode
+			tailLR <- newNode
+
+		else
+			[tailLR].next <- newNode
+			tailLR <- newNode
+		end_if
+	end_while
+
+if currentL1 != NIL then
+	remainingNode <- currentL1
+	
+else
+	remainingNode <- currentL2
+
+end_if
+
+while remainingNode != NIL execute
+	allocate(newNode)
+	[newNode].next <- NIL
+	[newNode].info <- [remainingNode].info
+	
+	remainingNode <- [remainingNode].next
+
+	if headLR != NIL
+		headLR <- newNode
+		tailLR <- newNode
+	else
+		[tailLR].next <- newNode
+		tailLR <- newNode
+end_while
+
+LR.head <- headLR
+
+end_subalgorithm
+
+->  implemented new list ->  Theta(n + m)
+
+->  working on the same list: BC Theta(min(n,m)), WC Theta(n,m) -> TC O(n+m)
+
+
+
+2. Determine the sum of the largest k elements from vector containing n distinct numbers
+
+ex: n = 10 : [6,12,9,91,3,5,25,81,11,23]
+k = 3
+result: 91 + 81 + 25
+
+SOLUTIONS:
+
+1. keep heap of k largest elems -> max-heap
+
+subalg sumOfK(elems)
+init(h)
+
+for i<-1,k execute
+    add(h, elems[i])
+
+end_for
+ 
+Complexity
+	heap with all elems -> maxheap -> O(nlogn)
+
+	Remove k elems (klogn)
+
+Total O(nlogn) 
+
+3. we add the first k to the min-heap
+
+for i <- k+1, n execute
+	if elems[i] > getFirst(h) then
+		removeRoot(h)
+		add(elems[i])
+	end_if
+end_for
+
+for i <- 1, k execute
+	elem <- removeRoot(h)
+
+	sum <- sum + elem
+end_for
+
+O(nlogk)
+
+3. array of k elems, similar to 2
+
+O(n * k)
+
+4. sort array -> Theta(nlogn)
+
+
+
