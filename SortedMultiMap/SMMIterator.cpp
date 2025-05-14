@@ -20,13 +20,13 @@ SMMIterator::SMMIterator(const SortedMultiMap& d) : map(d) {
     });
 
     first();
-}
+} // BC = TC = WC = Theta(n + k log k)
 
 void SMMIterator::first() {
     currentPair = 0;
     currentValue = 0;
     advanceToValid();
-}
+} // WC = theta(k), BC = theta(1), TC = theta(1) amortized
 
 void SMMIterator::next() {
     if (!valid()) 
@@ -37,21 +37,30 @@ void SMMIterator::next() {
         currentValue = 0;
     }
     advanceToValid();
-}
+} // WC = theta(k), BC = theta(1), TC = theta(1)
+
+void SMMIterator::advanceKSteps(int k) {
+    if (k <= 0) {
+        throw std::exception();
+    }
+
+    while (k--) 
+        next();
+} // WC = theta(steps * keys), BC = theta(steps), TC = theta(steps)
 
 bool SMMIterator::valid() const {
     return currentPair < pairs.size();
-}
+} // BC = WC = TC = theta(1)
 
 TElem SMMIterator::getCurrent() const {
     if (!valid()) 
         throw std::exception();
     return {pairs[currentPair].key, pairs[currentPair].values[currentValue]};
-}
+} // BC = WC = TC = theta(1) 
 
 void SMMIterator::advanceToValid() {
     while (currentPair < pairs.size() && currentValue >= pairs[currentPair].values.size()) {
         currentPair ++;
         currentValue = 0;
     }
-}
+} // BC = theta(1), WC = theta(keys), TC = theta(keys)

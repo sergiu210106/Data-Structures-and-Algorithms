@@ -23,11 +23,11 @@ SortedMultiMap::SortedMultiMap(Relation r) {
     }
 
     nextFree[capacity - 1] = -1;
-}
+} // BC = WC = TC = Theta(capacity) ~ Theta(1)
 
 int SortedMultiMap::hashFunction(TKey key) const {
     return std::abs(key) % capacity;
-}
+} // BC = WC = TC = Theta(1)
 
 void SortedMultiMap::resizeAndRehash() {
     int oldCapacity = capacity;
@@ -64,7 +64,7 @@ void SortedMultiMap::resizeAndRehash() {
     }
 
     delete[] oldTable;
-}
+} // BC = WC = TC = Theta(n)
 
 void SortedMultiMap::add(TKey c, TValue v) {
     if ((float) (SMMsize + 1) / capacity > loadFactorTreshold) {
@@ -142,7 +142,7 @@ void SortedMultiMap::add(TKey c, TValue v) {
     }
 
     SMMsize ++;
-}
+} // WC = Theta(capacity), BC = Theta(1), TC = O(capacity)
 
 vector<TValue> SortedMultiMap::search(TKey c) const {
     vector<TValue> result;
@@ -165,7 +165,7 @@ vector<TValue> SortedMultiMap::search(TKey c) const {
     }
 
     return result;
-}  
+}  // WC = Theta(capacity), BC = Theta(1+k), TC = O(capacity), where k is the number of values associated with c
 
 
 bool SortedMultiMap::remove(TKey c, TValue v) {
@@ -213,16 +213,16 @@ bool SortedMultiMap::remove(TKey c, TValue v) {
     }
 
     return false;
-}
+} // WC = Theta(capacity), BC = Theta(1), TC = Theta(1) amortized
 
 
 int SortedMultiMap::size() const {
     return SMMsize;
-}
+} // BC = WC = TC = Theta(1)
 
 bool SortedMultiMap::isEmpty() const {
     return SMMsize == 0;
-}
+}// BC = WC = TC = Theta(1)
 
 SortedMultiMap::~SortedMultiMap() {
     for (int i = 0; i < capacity; ++i) {
@@ -230,8 +230,8 @@ SortedMultiMap::~SortedMultiMap() {
     }
     delete[] table;
     delete[] nextFree;
-}
+}// BC = WC = TC = Theta(capacity)
 
 SMMIterator SortedMultiMap::iterator() const {
 	return SMMIterator(*this);
-}
+}// BC = WC = TC = Theta(1)

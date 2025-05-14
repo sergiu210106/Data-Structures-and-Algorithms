@@ -25,4 +25,6 @@ public:
     void next();
     bool valid() const;
     TElem getCurrent() const;
+    void advanceKSteps(int k);
+
 };

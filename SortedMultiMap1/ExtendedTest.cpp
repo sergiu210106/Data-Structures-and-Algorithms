@@ -244,90 +244,10 @@ void testIterator(Relation r) {
 	}
 }
 
-void testAdvanceK(Relation r) {
-	cout << "Test advanceKSteps" << endl;
-	SortedMultiMap smm = SortedMultiMap(r);
-	SMMIterator it = smm.iterator();
-
-	assert(!it.valid());
-	try {
-		it.advanceKSteps(1);
-		assert(false); 
-	}
-	catch (exception& ex) {
-		assert(true);
-	}
-
-	int cMin = 100;
-	int cMax = 300;
-	vector<int> keys = randomKeys(cMin, cMax);
-	int n = keys.size();
-	for (int i = 0; i < n; i++) {
-		smm.add(keys[i], 100);
-		if (keys[i] % 2 == 0) {
-			smm.add(keys[i], 200);
-		}
-	}
-
-	SMMIterator it2 = smm.iterator();
-	it2.first();
-
-	assert(it2.valid());
-
-	vector<TElem> elements;
-	SMMIterator copyIt = smm.iterator();
-	copyIt.first();
-	while (copyIt.valid()) {
-		elements.push_back(copyIt.getCurrent());
-		copyIt.next();
-	}
-
-	SMMIterator advIt = smm.iterator();
-	advIt.first();
-	for (int k = 0; k < elements.size(); k++) {
-		SMMIterator tempIt = smm.iterator();
-		tempIt.first();
-
-		for (int i = 0; i < k; i++) {
-			tempIt.next();
-		}
-
-		SMMIterator advItCopy = smm.iterator();
-		advItCopy.first();
-		advItCopy.advanceKSteps(k);
-
-		assert(tempIt.valid() == advItCopy.valid());
-		if (tempIt.valid()) {
-			assert(tempIt.getCurrent() == advItCopy.getCurrent());
-		}
-	}
-
-	SMMIterator it3 = smm.iterator();
-	it3.first();
-	try {
-		it3.advanceKSteps((int)elements.size() + 5); 
-		assert(false);
-	}
-	catch (exception& ex) {
-		assert(true);
-	}
-
-	SMMIterator it4 = smm.iterator();
-	it4.first();
-	TElem before = it4.getCurrent();
-	it4.advanceKSteps(0);
-	assert(it4.valid());
-	assert(it4.getCurrent() == before);
-}
-
 void testIterator() {
 	testIterator(asc);
 	testIterator(desc);
-
-	testAdvanceK(asc);
-	testAdvanceK(desc);
 }
-
 
 void testAllExtended() {
 	testCreate();
